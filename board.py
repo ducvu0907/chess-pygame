@@ -11,7 +11,9 @@ class Board:
     self.turn = 'white'
     self.logger = Logger()
     self.check_mate = False
-    
+    self.from_square = None
+    self.to_square = None
+
   def setup_board(self):
     # set up pawns
     for col in range(COLS):
@@ -152,7 +154,16 @@ class Board:
     dest_square.piece = self.selected_square.piece    
     dest_square.piece.row = dest_square.row        
     dest_square.piece.col = dest_square.col
+    src_square = self.selected_square
     self.selected_square.piece = None
+    # update indicator 
+    if self.from_square:
+      self.from_square.move_indicated = False
+    if self.to_square:
+      self.to_square.move_indicated = False
+    self.from_square = src_square
+    self.to_square = dest_square
+    # update logger 
     if self.promoted(dest_square):
       move += "=Q"
     if self.in_checkmate(against_color):
@@ -227,7 +238,12 @@ class Board:
     return output
 
   def draw(self, screen):
+    if self.from_square:
+      self.from_square.move_indicated = True
+    if self.to_square:
+      self.to_square.move_indicated = True
     for row in self.squares:
       for square in row:
         square.draw(self, screen)
+    self.logger.turn = self.turn
     self.logger.draw(screen)

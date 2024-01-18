@@ -9,7 +9,8 @@ class Piece:
     self.color = color
     self.type = type
 
-    image_path = f"images/{self.color}_{self.type}.png"
+    # image_path = f"images/{self.color}_{self.type}.png"
+    image_path = f"Projects/py_projects/chess/images/{self.color}_{self.type}.png" # full path
     self.image = pygame.image.load(image_path)
     
     self.has_moved = False
@@ -194,7 +195,7 @@ class King(Piece):
     for row, col in offsets:
       moves.append((self.row + row, self.col + col))
     return moves
-  
+
   def can_castle(self, board):
     output = []
     if not self.has_moved and not board.in_check(self.color):

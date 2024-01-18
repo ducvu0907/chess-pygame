@@ -56,9 +56,13 @@ class Logger:
     self.surf = pygame.Surface((LOGGER_WIDTH, LOGGER_HEIGHT))
     self.rect = self.surf.get_rect(topleft = (800, 0))
     
-    icon = pygame.image.load("images/chess_board.png")
+    icon_path = "images/chess_board.png"
+    # icon_path = "Projects/py_projects/chess/images/chess_board.png" # full path
+    icon = pygame.image.load(icon_path)
     self.icon = pygame.transform.scale(icon, (100, 100))
     self.move_log = MoveLog()
+    
+    self.turn = None
     
   def get_move(self, move, color):
     if color == 'white':
@@ -83,5 +87,10 @@ class Logger:
 
     # move log
     screen.blit(self.move_log.surf, self.move_log.rect)
-
     self.move_log.draw(screen)
+    
+    # display current turn
+    turn_font = pygame.font.Font(None, 30)
+    turn = turn_font.render(f"{self.turn.upper()} TURN!", True, TURN_COLOR)
+    turn_rect = turn.get_rect(center = TURN_POS)
+    screen.blit(turn, turn_rect)

@@ -18,6 +18,7 @@ class Square:
     self.highlighted = False
     
     self.notation = None
+    self.move_indicated = False
 
     self.rect = pygame.Rect(self.x, self.y, SQUARE_SIZE, SQUARE_SIZE)
 
@@ -45,10 +46,14 @@ class Square:
       else:
         rect.bottomright = self.rect.bottomright
       screen.blit(label, rect)
-    # selection
+    # draw selection
     if self.selected and self.piece is not None:
       select_color = (0, 0, 255)
       pygame.draw.rect(screen, select_color, self.rect, 3)
+    # draw indicator
+    if self.move_indicated:
+      indicated_color = SQUARE_INDICATOR_COLOR
+      pygame.draw.rect(screen, indicated_color, self.rect, 5)
     # draw pieces
     if self.piece:
       image = self.piece.image

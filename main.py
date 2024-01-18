@@ -1,5 +1,4 @@
-import pygame
-import sys
+import pygame, sys
 from tkinter import messagebox
 from constants import *
 from board import Board

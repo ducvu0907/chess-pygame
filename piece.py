@@ -9,8 +9,8 @@ class Piece:
     self.color = color
     self.type = type
 
-    # image_path = f"images/{self.color}_{self.type}.png"
-    image_path = f"Projects/py_projects/chess/images/{self.color}_{self.type}.png" # full path
+    image_path = f"images/{self.color}_{self.type}.png"
+    # image_path = f"Projects/py_projects/chess/images/{self.color}_{self.type}.png" # full path
     self.image = pygame.image.load(image_path)
     
     self.has_moved = False
